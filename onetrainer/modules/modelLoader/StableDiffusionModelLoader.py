@@ -78,6 +78,7 @@ class StableDiffusionModelLoader(BaseModelLoader, ModelLoaderModelSpecMixin, Mod
             base_model_name: str,
             vae_model_name: str,
     ) -> StableDiffusionModel | None:
+        print("load internal SD")
         with open(os.path.join(base_model_name, "meta.json"), "r") as meta_file:
             meta = json.load(meta_file)
             train_progress = TrainProgress(
@@ -88,6 +89,7 @@ class StableDiffusionModelLoader(BaseModelLoader, ModelLoaderModelSpecMixin, Mod
             )
 
         # base model
+        print("load diffusers SD")
         model = self.__load_diffusers(
             model_type, weight_dtypes, base_model_name, vae_model_name)
 
@@ -213,6 +215,7 @@ class StableDiffusionModelLoader(BaseModelLoader, ModelLoaderModelSpecMixin, Mod
             base_model_name: str,
             vae_model_name: str,
     ) -> StableDiffusionModel | None:
+        print("load checkpoint")
         sd_config_name = self._get_sd_config_name(model_type, base_model_name)
 
         state_dict = torch.load(base_model_name)
@@ -337,7 +340,7 @@ class StableDiffusionModelLoader(BaseModelLoader, ModelLoaderModelSpecMixin, Mod
                 model_type, weight_dtypes, model_names.base_model, model_names.vae_model)
             if model is not None:
                 return model
-        except:
+        except Exception as e:
             stacktraces.append(traceback.format_exc())
 
         try:
@@ -345,7 +348,8 @@ class StableDiffusionModelLoader(BaseModelLoader, ModelLoaderModelSpecMixin, Mod
                 model_type, weight_dtypes, model_names.base_model, model_names.vae_model)
             if model is not None:
                 return model
-        except:
+        # except:
+        except Exception as e:
             stacktraces.append(traceback.format_exc())
 
         try:
@@ -353,7 +357,7 @@ class StableDiffusionModelLoader(BaseModelLoader, ModelLoaderModelSpecMixin, Mod
                 model_type, weight_dtypes, model_names.base_model, model_names.vae_model)
             if model is not None:
                 return model
-        except:
+        except Exception as e:
             stacktraces.append(traceback.format_exc())
 
         try:
@@ -361,7 +365,7 @@ class StableDiffusionModelLoader(BaseModelLoader, ModelLoaderModelSpecMixin, Mod
                 model_type, weight_dtypes, model_names.base_model, model_names.vae_model)
             if model is not None:
                 return model
-        except:
+        except Exception as e:
             stacktraces.append(traceback.format_exc())
 
         for stacktrace in stacktraces:

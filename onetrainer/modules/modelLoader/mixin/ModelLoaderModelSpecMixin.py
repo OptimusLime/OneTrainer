@@ -1,5 +1,6 @@
 import json
 from abc import ABCMeta
+import os
 
 from safetensors import safe_open
 
@@ -23,6 +24,9 @@ class ModelLoaderModelSpecMixin(metaclass=ABCMeta):
 
         model_spec_name = self._default_model_spec_name(model_type)
         if model_spec_name:
+            if not os.path.exists(model_spec_name):
+                model_spec_name = os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)), "../../../", model_spec_name)
             with open(model_spec_name, "r", encoding="utf-8") as model_spec_file:
                 model_spec = ModelSpec.from_dict(json.load(model_spec_file))
         else:

@@ -3,6 +3,7 @@ from onetrainer.modules.util import create
 from onetrainer.modules.util.enum.TrainingMethod import TrainingMethod
 from onetrainer.modules.util.enum.ImageFormat import ImageFormat
 from onetrainer.modules.util.config.SampleConfig import SampleConfig
+from onetrainer.modules.modelSampler.BaseModelSampler import BaseModelSampler
 import torch
 # import os
 # import sys
@@ -14,6 +15,8 @@ def main():
     args = SampleArgs.parse_args()
     device = torch.device("cuda")
 
+    from ipdb import set_trace as bb
+
     training_method = TrainingMethod.FINE_TUNE
     if args.embedding_name is not None:
         training_method = TrainingMethod.EMBEDDING
@@ -23,7 +26,6 @@ def main():
     model_setup = create.create_model_setup(
         args.model_type, device, device, training_method=training_method)
 
-    print("Loading model " + args.base_model_name)
     model = model_loader.load(
         model_type=args.model_type,
         model_names=args.model_names(),
@@ -32,7 +34,7 @@ def main():
     model.to(device)
     model.eval()
 
-    model_sampler = create.create_model_sampler(
+    model_sampler: BaseModelSampler = create.create_model_sampler(
         train_device=device,
         temp_device=device,
         model=model,

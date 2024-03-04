@@ -1,13 +1,11 @@
+from onetrainer.modules.util.args.CalculateLossArgs import CalculateLossArgs
+from onetrainer.modules.module.GenerateLossesModel import GenerateLossesModel
+from onetrainer.modules.util.config.TrainConfig import TrainConfig
+import json
 import os
 import sys
 
 sys.path.append(os.getcwd())
-
-import json
-
-from modules.util.config.TrainConfig import TrainConfig
-from modules.module.GenerateLossesModel import GenerateLossesModel
-from modules.util.args.CalculateLossArgs import CalculateLossArgs
 
 
 def main():

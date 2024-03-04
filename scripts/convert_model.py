@@ -1,19 +1,20 @@
+from onetrainer.modules.util.args.ConvertModelArgs import ConvertModelArgs
+from onetrainer.modules.util import create
+from onetrainer.modules.util.enum.TrainingMethod import TrainingMethod
+from onetrainer.modules.util.ModelNames import ModelNames
 import os
 import sys
 
 sys.path.append(os.getcwd())
 
-from modules.util.ModelNames import ModelNames
-from modules.util.enum.TrainingMethod import TrainingMethod
-from modules.util import create
-from modules.util.args.ConvertModelArgs import ConvertModelArgs
-
 
 def main():
     args = ConvertModelArgs.parse_args()
 
-    model_loader = create.create_model_loader(model_type=args.model_type, training_method=args.training_method)
-    model_saver = create.create_model_saver(model_type=args.model_type, training_method=args.training_method)
+    model_loader = create.create_model_loader(
+        model_type=args.model_type, training_method=args.training_method)
+    model_saver = create.create_model_saver(
+        model_type=args.model_type, training_method=args.training_method)
 
     print("Loading model " + args.input_name)
     if args.training_method in [TrainingMethod.FINE_TUNE]:

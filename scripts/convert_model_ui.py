@@ -1,9 +1,8 @@
+from onetrainer.modules.ui.ConvertModelUI import ConvertModelUI
 import os
 import sys
 
 sys.path.append(os.getcwd())
-
-from modules.ui.ConvertModelUI import ConvertModelUI
 
 
 def main():

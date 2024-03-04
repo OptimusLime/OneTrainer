@@ -1,15 +1,13 @@
+from onetrainer.modules.trainer.GenericTrainer import GenericTrainer
+from onetrainer.modules.util.args.TrainArgs import TrainArgs
+from onetrainer.modules.util.commands.TrainCommands import TrainCommands
+from onetrainer.modules.util.callbacks.TrainCallbacks import TrainCallbacks
+from onetrainer.modules.util.config.TrainConfig import TrainConfig
+import json
 import os
 import sys
 
 sys.path.append(os.getcwd())
-
-import json
-
-from modules.util.config.TrainConfig import TrainConfig
-from modules.util.callbacks.TrainCallbacks import TrainCallbacks
-from modules.util.commands.TrainCommands import TrainCommands
-from modules.util.args.TrainArgs import TrainArgs
-from modules.trainer.GenericTrainer import GenericTrainer
 
 
 def main():

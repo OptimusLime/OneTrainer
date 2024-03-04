@@ -1,15 +1,13 @@
-import os
-import sys
-
-sys.path.append(os.getcwd())
-
+from onetrainer.modules.util.args.SampleArgs import SampleArgs
+from onetrainer.modules.util import create
+from onetrainer.modules.util.enum.TrainingMethod import TrainingMethod
+from onetrainer.modules.util.enum.ImageFormat import ImageFormat
+from onetrainer.modules.util.config.SampleConfig import SampleConfig
 import torch
+# import os
+# import sys
 
-from modules.util.config.SampleConfig import SampleConfig
-from modules.util.enum.ImageFormat import ImageFormat
-from modules.util.enum.TrainingMethod import TrainingMethod
-from modules.util import create
-from modules.util.args.SampleArgs import SampleArgs
+# sys.path.append(os.getcwd())
 
 
 def main():
@@ -20,13 +18,15 @@ def main():
     if args.embedding_name is not None:
         training_method = TrainingMethod.EMBEDDING
 
-    model_loader = create.create_model_loader(args.model_type, training_method=training_method)
-    model_setup = create.create_model_setup(args.model_type, device, device, training_method=training_method)
+    model_loader = create.create_model_loader(
+        args.model_type, training_method=training_method)
+    model_setup = create.create_model_setup(
+        args.model_type, device, device, training_method=training_method)
 
     print("Loading model " + args.base_model_name)
     model = model_loader.load(
         model_type=args.model_type,
-
+        model_names=args.model_names(),
         weight_dtypes=args.weight_dtypes(),
     )
     model.to(device)
@@ -57,4 +57,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    from ipdb import launch_ipdb_on_exception
+    with launch_ipdb_on_exception():
+        main()

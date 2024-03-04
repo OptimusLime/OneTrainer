@@ -1,9 +1,8 @@
+from onetrainer.modules.ui.TrainUI import TrainUI
 import os
 import sys
 
 sys.path.append(os.getcwd())
-
-from modules.ui.TrainUI import TrainUI
 
 
 def main():

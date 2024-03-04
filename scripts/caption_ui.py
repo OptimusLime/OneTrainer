@@ -1,10 +1,9 @@
+from onetrainer.modules.ui.CaptionUI import CaptionUI
+from onetrainer.modules.util.args.CaptionUIArgs import CaptionUIArgs
 import os
 import sys
 
 sys.path.append(os.getcwd())
-
-from modules.util.args.CaptionUIArgs import CaptionUIArgs
-from modules.ui.CaptionUI import CaptionUI
 
 
 def main():
